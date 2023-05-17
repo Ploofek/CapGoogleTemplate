@@ -3,7 +3,7 @@
 {% block body %}
 
 {% if blog %}
-    {{moment(blog.create_date).calendar()}} by {{blog.author.fname}} {{blog.author.lname}} 
+    {{moment(blog.create_date).calendar()}} 
     {% if blog.modifydate %}
         modified {{moment(blog.modifydate).calendar()}}
     {% endif %}

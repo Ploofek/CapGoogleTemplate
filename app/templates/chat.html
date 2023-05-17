@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if chat %}
+    {{moment(chat.create_date).calendar()}} 
+    {% if chat.modifydate %}
+        modified {{moment(chat.modifydate).calendar()}}
+    {% endif %}
+    <br>
+    {% if chat.author == current_user %}
+        <a data-toggle="tooltip" data-placement="top" title="Delete chat" href="/chat/delete/{{chat.id}}">
+            <img width="40" class="bottom-image" src="/static/delete.png">
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Edit chat" href="/chat/edit/{{chat.id}}">
+            <img width="40" class="bottom-image" src="/static/edit.png">
+        </a>
+    {% endif %}
+
+    <p class="fs-3 text-break">
+        {% if chat.author.image %}
+            <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(chat.author.image.read())}}">
+        {% endif %}
+            {{chat.content}} <br>
+            {{chat.reaction}}
+
+    </p>
+
+    {% if Reply %}
+    <h1 class="display-5">Replies</h1>
+    <a href="/Reply/new/{{chat.id}}" class="btn btn-primary btn-sm" role="button">New Reply</a>
+    <p></p>
+    {% for Reply in Reply %}
+        {% if current_user == Reply.author %}
+            <a href="/Reply/delete/{{Reply.id}}"><img width="20" src="/static/delete.png"></a> 
+            <a href="/Reply/edit/{{Reply.id}}"><img width="20" src="/static/edit.png"></a>
+        {% endif %}
+        {{moment(Reply.create_date).calendar()}} {{Reply.author.username}} 
+        {% if Reply.modifydate %}
+            modified {{moment(Reply.modifydate).calendar()}}
+        {% endif %}
+        <br>
+        <p class="fs-6">
+            {{Reply.content}}
+        </p>
+    {% endfor %}
+    {% else %}
+        <h1 class="h4">No Replies Yet</h1>
+        <a href="/Reply/new/{{chat.id}}" class="btn btn-primary btn-sm" role="button">New Reply</a>
+    {% endif %}
+
+
+{% else %}
+    <h1 class="display-5">No Chat</h1>
+{% endif %}
+
+{% endblock %}

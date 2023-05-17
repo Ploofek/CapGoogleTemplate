@@ -1,11 +1,6 @@
-<!-- this is a generic form page.  Best way to make a new form page is to 
-copy this one and then edit it. -->
-
 {% extends "base.html" %}
 
 {% block body %}
-        <h1>Blogs!</h1>
-
         <!--List all errors in a group at the top-->
         {% for field in form.errors %}
             {% for error in form.errors[field] %}
@@ -15,16 +10,20 @@ copy this one and then edit it. -->
             {% endfor %}
         {% endfor %}
 
+        <h10 class="display-5">{{chat.subject}}</h10>
+        {{chat.content}} <br>
+        <h6 class="display-5">Replys</h6>
+
         <form method=post>
             {{ form.hidden_tag() }}
             
             {{ form.content.label }} <br>
-            {{ form.content(size=64) }}
-            <!--List the errors for this comment stuff-->
+            {{ form.content(cols=64) }}
+            <!--List the errors for this field-->
             {% for error in form.content.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-
+            <br>
             {{form.submit()}}
         </form>
         

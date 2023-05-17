@@ -10,7 +10,7 @@ like the navbar. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--Put the title of your app here-->
-    <title>Title</title>
+    <title>VentSent<3</title>
     <!--This is where the link to the favicon and local CSS file goes.  The files that are referenced are in the static folder.-->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='local.css') }}"  type="text/css" />
@@ -35,7 +35,7 @@ like the navbar. -->
             {% for message in messages %}
             <div class="mx-5 me-4 border-bottom px-1 col-md-3"><mark>{{ message }}</mark></div>
             {% endfor %}
-            <hr class="mt-1" style="height:2px;border-width:0;color:gray;background-color:gray">
+            <hr class="mt-1" style="height:2px;border-width:0;color:rgb(7, 7, 8);background-color:rgb(51, 22, 171)">
             </div>
           </div>
         {% endif %}
